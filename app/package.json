@@ -13,7 +13,8 @@
     "socket.io": "^2.2.0"
   },
   "scripts": {
-    "start": "node server.js && react-scripts start",
+    "start": "react-scripts start",
+    "express": "SET PORT=5000 && nodemon api/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
