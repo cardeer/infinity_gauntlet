@@ -1,4 +1,6 @@
 import {combineReducers} from "redux"
+import {projectDirectory} from "./reducers"
+
 export default combineReducers({
-    projectDirector: null
+    projectDirectory: projectDirectory
 })
