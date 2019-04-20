@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import {withRouter} from 'react-router-dom'
 import {setProjectDirectory} from '../actions'
-import axios from 'axios'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 
 class Home extends Component {
     onSelectProjectSubmit = async e => {
@@ -16,15 +15,20 @@ class Home extends Component {
     render() {
         return (
             <div className="App">
+                <div className="background-element"></div>
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-8 col-md-6 offset-lg-2 offset-md-3">
+                            <div className="container-fluid text-center mb-4" style={{overflow: 'hidden'}}>
+                                <img id="infinity-gauntlet-img" src="/images/infinity_gauntlet.png" alt="" style={{height: '200px', width: 'auto'}} />
+                            </div>
+
                             <form onSubmit={this.onSelectProjectSubmit} className="text-center">
-                                <label>Galaxy path</label><br /><br />
+                                <label className="h5">Galaxy path</label><br /><br />
                                 <div className="input-group">
-                                    <input type="text" className="form-control" placeholder="Your galaxy path" name="project-dir" autoComplete="off" />
+                                    <input type="text" className="form-control" placeholder="Your galaxy path" name="project-dir" autoComplete="on" />
                                     <div className="input-group-append">
-                                        <div className="input-group-text" style={{cursor: 'pointer'}}>TELEPORT</div>
+                                        <button className="input-group-text" style={{cursor: 'pointer', backgroundColor: '#202020'}}>CREATE</button>
                                     </div>
                                 </div>
                             </form>
@@ -33,6 +37,18 @@ class Home extends Component {
                 </div>
 
                 <style>{`
+                    .background-element{
+                        position: fixed;
+                        width: 100%;
+                        height: 100%;
+                        top: 0;
+                        left: 0;
+                        background-image: url(http://sfwallpaper.com/images/black-space-wallpaper-4.jpg);
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                        background-position: center;
+                        opacity: .5;
+                    }
                     .App{
                         position: fixed;
                         top:0;
@@ -59,6 +75,25 @@ class Home extends Component {
                         border: none;
                         background: #202020;
                         color: white;
+                    }
+                    button{
+                        box-shadow: none;
+                        outline: none !important;
+                        border: none;
+                    }
+
+                    @keyframes velocity{
+                        from{
+                            transform: translateX(-200px);
+                        }
+                        to{
+                            transform: translateX(200px);
+                        }
+                    }
+
+                    #infinity-gauntlet-img{
+                        transform: translateX(-200px);
+                        animation: velocity 0.001s linear infinite;
                     }
                 `}</style>
             </div>
