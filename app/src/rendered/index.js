@@ -3,7 +3,7 @@ import * as THREE from "three";
 import createStars from "./GenerateStar";
 import createPlanet from "./GeneratePlanet";
 const OrbitControls = require("three-orbit-controls")(THREE);
-class Shape extends Component {
+class Universe extends Component {
   constructor(props) {
     super(props);
     this.animate = this.animate.bind(this);
@@ -43,10 +43,14 @@ class Shape extends Component {
 
     this.planets = [];
 
-    for (let i = 1; i < 12; i++) {
-      this.planets.push(createPlanet(this.scene, i));
+    const { files } = this.props;
+
+    for (let i = 0; i < files.length; i++) {
+      this.planets.push(
+        createPlanet(this.scene, Math.floor(Math.random() * 12))
+      );
     }
-    console.log(this.planets);
+    console.log(files);
 
     this.animate();
   }
@@ -83,4 +87,4 @@ class Shape extends Component {
     );
   }
 }
-export default Shape;
+export default Universe;
