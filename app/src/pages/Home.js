@@ -24,9 +24,9 @@ class Home extends Component {
                             </div>
 
                             <form onSubmit={this.onSelectProjectSubmit} className="text-center">
-                                <label className="h5">Galaxy path</label><br /><br />
+                                <label className="h5">Universe path</label><br /><br />
                                 <div className="input-group">
-                                    <input type="text" className="form-control" placeholder="Your galaxy path" name="project-dir" autoComplete="on" />
+                                    <input type="text" className="form-control" placeholder="Your universe path" name="project-dir" autoComplete="on" />
                                     <div className="input-group-append">
                                         <button className="input-group-text" style={{cursor: 'pointer', backgroundColor: '#202020'}}>CREATE</button>
                                     </div>
