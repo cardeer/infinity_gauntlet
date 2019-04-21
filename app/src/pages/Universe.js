@@ -1,73 +1,81 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {withRouter} from 'react-router-dom'
-import Axios from 'axios'
+import React from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import Axios from "axios";
 
-Array.prototype.shuffle = function(){
-    var clone = this.slice()
-    var currentIndex = clone.length, temporaryValue, randomIndex
+import Space from "../rendered";
+
+Array.prototype.shuffle = function () {
+    var clone = this.slice();
+    var currentIndex = clone.length,
+        temporaryValue,
+        randomIndex;
     while (0 !== currentIndex) {
-        randomIndex = Math.floor(Math.random() * currentIndex)
-        currentIndex -= 1
-        temporaryValue = clone[currentIndex]
-        clone[currentIndex] = clone[randomIndex]
-        clone[randomIndex] = temporaryValue
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = clone[currentIndex];
+        clone[currentIndex] = clone[randomIndex];
+        clone[randomIndex] = temporaryValue;
     }
 
-    return clone
-}
+    return clone;
+};
 
 const Universe = props => {
-    const [files, setFiles] = React.useState([])
-    const [filesToRemove, setFilesToRemove] = React.useState([])
-    const [thanosLoading, setThanosLoading] = React.useState(true)
-    const [snapFinished, setSnapFinished] = React.useState(false)
+    const [files, setFiles] = React.useState([]);
+    const [filesToRemove, setFilesToRemove] = React.useState([]);
+    const [thanosLoading, setThanosLoading] = React.useState(true);
+    const [snapFinished, setSnapFinished] = React.useState(false);
 
     const snapFingers = async () => {
-        setThanosLoading(true)
+        setThanosLoading(true);
         filesToRemove.forEach(async (value, index) => {
-            const path = btoa(value.path)
-            await Axios.get(process.env.REACT_APP_API_URL + `path/delete/${path}`)
-            if (index == filesToRemove.length - 1){
-                setSnapFinished(true)
+            const path = btoa(value.path);
+            await Axios.get(process.env.REACT_APP_API_URL + `path/delete/${path}`);
+            if (index == filesToRemove.length - 1) {
+                setSnapFinished(true);
             }
-        })
-    }
+        });
+    };
 
     React.useEffect(() => {
-        if (!props.projectDirectory)
-            props.history.push('/')
-        else if (files.length == 0){
-            const {projectDirectory} = props
-            Axios.get(process.env.REACT_APP_API_URL + `path/view/${projectDirectory}`).then(res => {
-                const origin = res.data
-                setFiles(origin)
-                const shuffle = res.data.shuffle()
-                setFilesToRemove(shuffle.splice(0, Math.floor(shuffle.length / 2)))
-                setThanosLoading(false)
-            })
+        if (!props.projectDirectory) props.history.push("/");
+        else if (files.length == 0) {
+            const { projectDirectory } = props;
+            Axios.get(
+                process.env.REACT_APP_API_URL + `path/view/${projectDirectory}`
+            ).then(res => {
+                const origin = res.data;
+                setFiles(origin);
+                const shuffle = res.data.shuffle();
+                setFilesToRemove(shuffle.splice(0, Math.floor(shuffle.length / 2)));
+                setThanosLoading(false);
+            });
         }
 
-        if (snapFinished){
-            const {projectDirectory} = props
-            Axios.get(process.env.REACT_APP_API_URL + `path/view/${projectDirectory}`).then(res => {
-                const origin = res.data
-                setFiles(origin)
-                setThanosLoading(false)
-                setSnapFinished(false)
-            })
+        if (snapFinished) {
+            const { projectDirectory } = props;
+            Axios.get(
+                process.env.REACT_APP_API_URL + `path/view/${projectDirectory}`
+            ).then(res => {
+                const origin = res.data;
+                setFiles(origin);
+                setThanosLoading(false);
+                setSnapFinished(false);
+            });
         }
-    }, [files, snapFinished])
+    }, [files, snapFinished]);
 
-    return(
+    return (
         <div>
+            <Space files={files} />
             <div loading={thanosLoading.toString()} className="preparing-thanos">
                 <div className="preparing-thanos-bg"></div>
                 <div className="preparing-thanos-title">
                     <h1>THANOS IS COMING !!</h1><br />
                     <h5 className="text-muted">He's coming from Titan</h5>
                 </div>
-                <img style={{height: '200px', width: 'auto'}} src="/images/thanos-head.png" alt="" />
+                <img style={{ height: '200px', width: 'auto' }} src="/images/thanos-head.png" alt="" />
             </div>
             {
                 files.length > 0 &&
@@ -128,8 +136,8 @@ const Universe = props => {
     )
 }
 
-function mstp({projectDirectory}){
-    return {projectDirectory: projectDirectory ? projectDirectory : null}
+function mstp({ projectDirectory }) {
+    return { projectDirectory: projectDirectory ? projectDirectory : null };
 }
 
-export default withRouter(connect(mstp)(Universe))
+export default withRouter(connect(mstp)(Universe));
