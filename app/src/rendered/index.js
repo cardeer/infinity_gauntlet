@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import * as THREE from "three";
 import createStars from "./GenerateStar";
 import createPlanet from "./GeneratePlanet";
-const OrbitControls = require("three-orbit-controls")(THREE);
+const OrbitControls = require('three-orbit-controls')(THREE);
 class Universe extends Component {
   constructor(props) {
     super(props);

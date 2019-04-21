@@ -5,6 +5,8 @@ import Axios from "axios";
 
 import Space from "../rendered";
 
+const dummyFile = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
 Array.prototype.shuffle = function () {
     var clone = this.slice();
     var currentIndex = clone.length,
@@ -68,7 +70,9 @@ const Universe = props => {
 
     return (
         <div>
-            <Space files={files} />
+            {
+                <Space files={dummyFile} />
+            }
             <div loading={thanosLoading.toString()} className="preparing-thanos">
                 <div className="preparing-thanos-bg"></div>
                 <div className="preparing-thanos-title">
@@ -79,7 +83,7 @@ const Universe = props => {
             </div>
             {
                 files.length > 0 &&
-                <h3 onClick={snapFingers}>Snap fingers</h3>
+                <h3 className="snap-fingers" style={{position: 'fixed', top: '10px', left: '10px', color: 'white'}} onClick={snapFingers}>Snap fingers</h3>
             }
 
             {
