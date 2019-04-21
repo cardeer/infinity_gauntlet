@@ -61,8 +61,19 @@ const Universe = props => {
 
     return(
         <div>
-            <img loading={thanosLoading.toString()} className="preparing-thanos" style={{height: '200px', width: 'auto'}} src="/images/thanos-head.png" alt="" />
-            <h3 onClick={snapFingers}>Snap</h3>
+            <div loading={thanosLoading.toString()} className="preparing-thanos">
+                <div className="preparing-thanos-bg"></div>
+                <div className="preparing-thanos-title">
+                    <h1>THANOS IS COMING !!</h1><br />
+                    <h5 className="text-muted">He's coming from Titan</h5>
+                </div>
+                <img style={{height: '200px', width: 'auto'}} src="/images/thanos-head.png" alt="" />
+            </div>
+            {
+                files.length > 0 &&
+                <h3 onClick={snapFingers}>Snap fingers</h3>
+            }
+
             {
                 files.map((value, index) => {
                     return <p key={index}>{value.name}</p>
@@ -78,17 +89,39 @@ const Universe = props => {
                         transform: rotateZ(360deg) translate(-50%, -50%);
                     }
                 }
-                .preparing-thanos{
+                .preparing-thanos img{
                     position: fixed;
+                    z-index: 3;
                     top: 50%;
                     left: 50%;
                     transform: rotateZ(0deg) translate(-50%, -50%);
                     transform-origin: 0 0;
                     animation: preparing 1s linear infinite;
                 }
+                .preparing-thanos .preparing-thanos-bg{
+                    position: fixed;
+                    z-index: 2;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    background-color: black;
+                    display: block;
+                }
                 .preparing-thanos[loading=false]{
                     display: none;
-                    animation: none;
+                }
+                .preparing-thanos[loading=true] img{
+                    animation: preparing 1s linear infinite;
+                }
+                .preparing-thanos .preparing-thanos-title{
+                    position: absolute;
+                    z-index: 3;
+                    color: white;
+                    text-align: center;
+                    display: block;
+                    width: 100%;
+                    top: 50px;
                 }
             `}</style>
         </div>
