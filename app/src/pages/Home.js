@@ -18,11 +18,11 @@ class Home extends Component {
                 <div className="background-element"></div>
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-8 col-md-6 offset-lg-2 offset-md-3">
-                            <div className="container-fluid text-center mb-4" style={{overflow: 'hidden'}}>
-                                <img id="infinity-gauntlet-img" src="/images/infinity_gauntlet.png" alt="" style={{height: '200px', width: 'auto'}} />
-                            </div>
+                        <div className="container-fluid text-center mb-4" style={{overflowX: 'hidden'}}>
+                            <img id="infinity-gauntlet-img" src="/images/infinity_gauntlet.png" alt="" style={{height: '200px', width: 'auto'}} />
+                        </div>
 
+                        <div className="col-lg-8 col-md-6 offset-lg-2 offset-md-3">
                             <form onSubmit={this.onSelectProjectSubmit} className="text-center">
                                 <label className="h5">Thanos2.js UI</label><br /><br />
                                 <div className="input-group">
@@ -84,16 +84,16 @@ class Home extends Component {
 
                     @keyframes velocity{
                         from{
-                            transform: translateX(-200px);
+                            transform: translateX(-300px);
                         }
                         to{
-                            transform: translateX(200px);
+                            transform: translateX(300px);
                         }
                     }
 
                     #infinity-gauntlet-img{
                         transform: translateX(-200px);
-                        animation: velocity 0.00001s linear infinite;
+                        animation: velocity 0.001s linear infinite;
                     }
                 `}</style>
             </div>
