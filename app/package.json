@@ -15,7 +15,7 @@
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "socket.io": "^2.2.0",
-    "three": "^0.103.0",
+    "three": "^0.137.0",
     "three-orbit-controls": "^82.1.0"
   },
   "scripts": {
